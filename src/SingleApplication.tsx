@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./SingleApplication.module.css";
+import { Application } from "./Applications";
 
 const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat("en-GB", {
@@ -17,7 +18,11 @@ const formatDate = (dateString: string): string => {
   return `${day}-${month}-${year}`;
 };
 
-const SingleApplication = ({ application }) => {
+interface ApplicationProps {
+  application: Application;
+}
+
+const SingleApplication: React.FC<ApplicationProps> = ({ application }) => {
   return (
     <div className={styles.SingleApplication}>
       <div className={styles.cell}>
