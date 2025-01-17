@@ -5,10 +5,10 @@
 }
 
 .Header h1 {
-  color: #143b6b;
+  color: var(--color-denim-15);
   font-weight: 800;
 }
 
 .logo path {
-  fill: #fb534a;
+  fill: var(--color-coral-65);
 }
