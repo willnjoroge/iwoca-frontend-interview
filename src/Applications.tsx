@@ -6,11 +6,13 @@ import { Button } from "./ui/Button/Button";
 const Applications = () => {
   const [applications, setApplications] = useState([]);
   const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const fetchApplications = async () => {
     setIsLoading(true);
+    setError("");
 
     try {
       const response = await fetch(
@@ -24,6 +26,9 @@ const Applications = () => {
 
       setApplications((prevApplications) => [...prevApplications, ...data]);
     } catch (error) {
+      setError(
+        "An error occurred while loading the applications. Please try again."
+      );
       console.error("Error", error);
     } finally {
       setIsLoading(false);
@@ -31,7 +36,9 @@ const Applications = () => {
   };
 
   const loadMoreApplications = () => {
-    if (!isLoading && hasMore) {
+    if (error) {
+      fetchApplications();
+    } else if (!isLoading && hasMore) {
       setPage(page + 1);
     }
   };
@@ -41,25 +48,25 @@ const Applications = () => {
   }, [page]);
 
   return (
-    <>
-      <div className={styles.Applications}>
-        {applications.map((application) => (
-          <SingleApplication key={application.id} application={application} />
-        ))}
+    <div className={styles.Applications}>
+      {applications.map((application) => (
+        <SingleApplication key={application.id} application={application} />
+      ))}
 
-        {hasMore && (
-          <Button
-            className={styles.button}
-            isLoading={isLoading}
-            onClick={loadMoreApplications}
-          />
-        )}
+      {hasMore && (
+        <Button
+          className={styles.button}
+          isLoading={isLoading}
+          onClick={loadMoreApplications}
+        />
+      )}
 
-        {!hasMore && !isLoading && (
-          <p>All {applications.length} applications have been loaded</p>
-        )}
-      </div>
-    </>
+      {error && <p>{error}</p>}
+
+      {!hasMore && !isLoading && (
+        <p>All {applications.length} applications have been loaded</p>
+      )}
+    </div>
   );
 };
 
