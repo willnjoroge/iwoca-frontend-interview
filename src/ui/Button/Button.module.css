@@ -9,6 +9,13 @@
   text-align: center;
   white-space: nowrap;
   transition: background-color 0.3s;
+  width: 200px;
+  height: 39px;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0 79px;
 }
 
 .button:focus {
