@@ -48,6 +48,7 @@ const Applications = () => {
   };
 
   const loadMoreApplications = () => {
+    // If there is already an error, do not increment page
     if (error) {
       fetchApplications();
     } else if (!isLoading && hasMore) {
