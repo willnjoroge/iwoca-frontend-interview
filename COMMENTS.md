@@ -12,6 +12,8 @@ Implement rendering of Applications retrieved from the Backend
 
 ## Any tests?
 
+- Basic unit tests to varify redering of text
+
 # Assumptions
 
 - Currency is assumed to always be £
@@ -19,5 +21,6 @@ Implement rendering of Applications retrieved from the Backend
 
 # Future Improvements
 
+- Unit Testing: mock axios HTTP response from Backend
 - State: implement some form of state management (Redux)
 - Validations: the application date can be after the expiry date which would be an invalid application (though this would most likely be corrected in the BE)
